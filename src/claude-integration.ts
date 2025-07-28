@@ -107,4 +107,18 @@ export class ClaudeCodeIntegration {
     const integration = new ClaudeCodeIntegration();
     await integration.recordCommand(command);
   }
+
+  async removeIntegration(): Promise<void> {
+    try {
+      if (fs.existsSync(this.configPath)) {
+        fs.unlinkSync(this.configPath);
+        console.log(`Configuration file removed: ${this.configPath}`);
+      } else {
+        console.log('Configuration file not found');
+      }
+    } catch (error) {
+      console.error('Error removing integration:', error);
+      throw error;
+    }
+  }
 }
